@@ -1,0 +1,14 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    env:
+      - "HF_TOKEN=${_HF_TOKEN}"
+    args:
+      - "build"
+      - "--build-arg=${_HF_TOKEN}"
+      - "-t"
+      - "europe-west2-docker.pkg.dev/constellaxion/serving-images/foundation-model"
+      - "."
+images:
+  - "europe-west2-docker.pkg.dev/constellaxion/serving-images/foundation-model"
+substitutions:
+  _HF_TOKEN: "replace-me"
