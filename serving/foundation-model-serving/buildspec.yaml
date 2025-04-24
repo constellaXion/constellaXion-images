@@ -10,19 +10,25 @@ phases:
       - echo "==> Starting install phase"
       - echo "AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION"
       - echo "AWS_ACCOUNT_ID: $AWS_ACCOUNT_ID"
-      - aws sts get-caller-identity  # Prints the caller identity (debug IAM issues)
+      - aws sts get-caller-identity
+
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - REPO_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/constellaxion/serving-images/foundation-model
-      - $(aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REPO_URI)
+      - export REPO_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/constellaxion/serving-images/foundation-model
+      - echo "REPO URI: $REPO_URI"
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REPO_URI
+
   build:
     commands:
       - echo Building Docker image...
+      - export REPO_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/constellaxion/serving-images/foundation-model
       - docker build --build-arg HF_TOKEN=$HF_TOKEN -t $REPO_URI .
+
   post_build:
     commands:
       - echo Pushing image to ECR...
+      - export REPO_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/constellaxion/serving-images/foundation-model
       - docker push $REPO_URI
 
 artifacts:
