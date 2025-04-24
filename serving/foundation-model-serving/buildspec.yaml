@@ -5,24 +5,19 @@ env:
     HF_TOKEN: hf-token:HF_TOKEN
 
 phases:
-  install:
-    commands:
-      - echo default region ${AWS_DEFAULT_REGION}
-      - echo account id ${AWS_ACCOUNT_ID}
-      - aws sts get-caller-identity
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
       - REPO_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/constellaxion/serving-images/foundation-model
-      - $(aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REPO_URI)
+      - aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${REPO_URI}
   build:
     commands:
       - echo Building Docker image...
-      - docker build --build-arg HF_TOKEN=$HF_TOKEN -t $REPO_URI .
+      - docker build --build-arg HF_TOKEN=${HF_TOKEN} -t ${REPO_URI} .
   post_build:
     commands:
       - echo Pushing image to ECR...
-      - docker push $REPO_URI
+      - docker push ${REPO_URI}
 
 artifacts:
   files: []
