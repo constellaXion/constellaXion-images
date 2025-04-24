@@ -13,7 +13,7 @@ phases:
       - aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${REPO_URI}
   build:
     commands:
-      - echo Building Docker image...
+      - echo Building Docker image....
       - docker build --build-arg HF_TOKEN=${HF_TOKEN} -t ${REPO_URI} .
   post_build:
     commands:
