@@ -7,9 +7,9 @@ env:
 phases:
   install:
     commands:
-      - echo "AWS_DEFAULT_REGION:$AWS_DEFAULT_REGION"
-      - echo "AWS_ACCOUNT_ID:$AWS_ACCOUNT_ID"
-      - aws sts get-caller-identity  # Prints the caller identity (debug IAM issues)
+      - echo default region ${AWS_DEFAULT_REGION}
+      - echo account id ${AWS_ACCOUNT_ID}
+      - aws sts get-caller-identity
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
