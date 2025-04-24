@@ -14,6 +14,7 @@ phases:
   build:
     commands:
       - echo Building Docker image....
+      - ls -la
       - docker build --build-arg HF_TOKEN=${HF_TOKEN} -t ${REPO_URI} .
   post_build:
     commands:
