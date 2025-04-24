@@ -5,6 +5,12 @@ env:
     HF_TOKEN: hf-token:HF_TOKEN
 
 phases:
+  install:
+    commands:
+      - echo "==> Starting install phase"
+      - echo "AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION"
+      - echo "AWS_ACCOUNT_ID: $AWS_ACCOUNT_ID"
+      - aws sts get-caller-identity  # Prints the caller identity (debug IAM issues)
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
