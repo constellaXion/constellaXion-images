@@ -19,7 +19,7 @@ phases:
   post_build:
     commands:
       - echo Pushing image to ECR...
-      - docker push ${REPO_URI}
+      - docker push ${REPO_URI}/foundation-model
 
 artifacts:
   files: []
