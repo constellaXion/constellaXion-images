@@ -15,12 +15,11 @@ phases:
     commands:
       - echo Building Docker image....
       - cd serving/foundation-model-serving
-      - docker build --build-arg HF_TOKEN=${HF_TOKEN} -t ${REPO_URI}/foundation-model .
+      - docker build --build-arg HF_TOKEN=${HF_TOKEN} -t ${REPO_URI}:foundation-model-v1 .
   post_build:
     commands:
-      - echo ${REPO_URI}
       - echo Pushing image to ECR...
-      - docker push ${REPO_URI}/foundation-model
+      - docker push ${REPO_URI}:foundation-model-v1
 
 artifacts:
   files: []
