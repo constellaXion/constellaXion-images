@@ -18,6 +18,7 @@ phases:
       - docker build --build-arg HF_TOKEN=${HF_TOKEN} -t ${REPO_URI}/foundation-model .
   post_build:
     commands:
+      - echo ${REPO_URI}
       - echo Pushing image to ECR...
       - docker push ${REPO_URI}/foundation-model
 
