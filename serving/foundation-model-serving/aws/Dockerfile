@@ -19,9 +19,9 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.11 1 \
 WORKDIR /app
 COPY . /app
 
-# Copy entrypoint script
-COPY entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
+# # Copy entrypoint script
+# COPY entrypoint.sh /app/entrypoint.sh
+# RUN chmod +x /app/entrypoint.sh
 
 RUN pip install --no-cache-dir -r requirements.txt
 

@@ -1,0 +1,9 @@
+transformers
+torch
+fastapi
+pydantic
+uvicorn
+vllm
+asyncio
+
+
