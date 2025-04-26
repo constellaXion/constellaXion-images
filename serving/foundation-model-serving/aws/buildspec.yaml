@@ -14,7 +14,7 @@ phases:
   build:
     commands:
       - echo Building Docker image....
-      - cd serving/foundation-model-serving
+      - cd serving/foundation-model-serving/aws
       - docker build --build-arg HF_TOKEN=${HF_TOKEN} -t ${REPO_URI}:foundation-model-v1 .
   post_build:
     commands:
