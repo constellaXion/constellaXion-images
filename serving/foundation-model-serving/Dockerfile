@@ -36,5 +36,5 @@ ENV TORCH_COMPILE=0
 EXPOSE 8080
 # Use the entrypoint script to remount /dev/shm before starting the server
 # This larger shared memory area should prevent NCCL errors due to insufficient shared memory when running distributed serving (e.g., with pipeline parallelism)
-ENTRYPOINT ["/app/entrypoint.sh"]
+# ENTRYPOINT ["/app/entrypoint.sh"]
 CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8080"]

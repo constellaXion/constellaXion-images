@@ -65,13 +65,13 @@ class PromptRequest(BaseModel):
     instances: list[PromptInstance]
 
 
-def check_shm_size():
-    """Check and print the size of shared memory (/dev/shm)."""
-    stat = os.statvfs("/dev/shm")
-    size = stat.f_frsize * stat.f_blocks  # in bytes
-    print(f"/dev/shm size: {size / (1024*1024)} MB")
+# def check_shm_size():
+#     """Check and print the size of shared memory (/dev/shm)."""
+#     stat = os.statvfs("/dev/shm")
+#     size = stat.f_frsize * stat.f_blocks  # in bytes
+#     print(f"/dev/shm size: {size / (1024*1024)} MB")
 
-check_shm_size()
+# check_shm_size()
 # === /predict Endpoint: Returns Final Generated Text ===
 @app.post("/predict")
 async def predict(req: PromptRequest):
