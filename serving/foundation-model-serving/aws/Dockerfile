@@ -25,8 +25,7 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.11 1 \
 
 # Additonal for testing
 # Install necessary dependencies for MMS and SageMaker Inference Toolkit
-RUN build-essential \
-    ca-certificates \
+RUN ca-certificates \
     openjdk-8-jdk-headless \
     curl \
     vim \
