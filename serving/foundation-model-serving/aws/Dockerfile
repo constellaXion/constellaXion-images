@@ -25,11 +25,13 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.11 1 \
 
 # Additonal for testing
 # Install necessary dependencies for MMS and SageMaker Inference Toolkit
-RUN openjdk-8-jdk-headless \
-    curl \
-    vim \
-    && rm -rf /var/lib/apt/lists/* \
-    && curl -O https://bootstrap.pypa.io/get-pip.py
+# RUN build-essential \
+#     ca-certificates \
+#     openjdk-8-jdk-headless \
+#     curl \
+#     vim \
+#     && rm -rf /var/lib/apt/lists/* \
+#     && curl -O https://bootstrap.pypa.io/get-pip.py
 
 # Additional for testing
 # Install MXNet, MMS, and SageMaker Inference Toolkit to set up MMS
