@@ -42,8 +42,8 @@ RUN pip3 --no-cache-dir install mxnet \
 
 # Additional for testing
 # Copy entrypoint script to the image
-COPY dockerd-entrypoint.py /usr/local/bin/dockerd-entrypoint.py
-RUN chmod +x /usr/local/bin/dockerd-entrypoint.py
+# COPY dockerd-entrypoint.py /usr/local/bin/dockerd-entrypoint.py
+# RUN chmod +x /usr/local/bin/dockerd-entrypoint.py
 
 
 WORKDIR /app
