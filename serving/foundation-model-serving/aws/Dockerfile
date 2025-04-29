@@ -54,7 +54,7 @@ RUN mkdir -p /home/model-server/
 
 # Additional for testing
 # Copy the default custom service file to handle incoming data and inference requests
-COPY model_handler.py /home/model-server/model_handler.py
+COPY test_server.py /home/model-server/test_server.py
 
 
 # # Copy entrypoint script
