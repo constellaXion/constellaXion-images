@@ -6,6 +6,7 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from vllm import AsyncEngineArgs, AsyncLLMEngine
 from vllm.sampling_params import SamplingParams
+from contextlib import asynccontextmanager
 
 # Prevent any TorchDynamo compile attempts from crashing
 torch._dynamo.config.suppress_errors = True
@@ -20,19 +21,18 @@ HF_TOKEN = os.getenv("HF_TOKEN")
 print(f"MODEL_NAME: {MODEL_NAME}")
 print(f"DTYPE: {DTYPE}")
 
-# === Initialize FastAPI ===
-app = FastAPI()
-
-
-# Run nvidia-smi at startup to log GPU info
-@app.on_event("startup")
-async def startup_event():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
     """Log GPU information using nvidia-smi at server startup."""
     try:
         output = subprocess.check_output(["nvidia-smi"]).decode("utf-8")
         print("nvidia-smi output:\n", output)
     except (subprocess.CalledProcessError, FileNotFoundError) as e:
         print("Error running nvidia-smi:", e)
+    yield
+
+# === Initialize FastAPI ===
+app = FastAPI(lifespan=lifespan)
 
 # === Initialize vLLM Engine ===
 engine_args = AsyncEngineArgs(

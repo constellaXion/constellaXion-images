@@ -2,9 +2,8 @@ steps:
   - name: "gcr.io/cloud-builders/docker"
     args:
       - "build"
-      - "--build-arg=HF_TOKEN=<replace-with-hf-token>"
       - "-t"
-      - "europe-west2-docker.pkg.dev/constellaxion/serving-images/foundation-model"
+      - "europe-west2-docker.pkg.dev/constellaxion/serving-images/foundation-model:latest"
       - "."
 images:
-  - "europe-west2-docker.pkg.dev/constellaxion/serving-images/foundation-model"
+  - "europe-west2-docker.pkg.dev/constellaxion/serving-images/foundation-model:latest"
