@@ -1,4 +1,4 @@
-constellaxion-utils==0.1.3
+constellaxion-utils==1.1.1
 trl==0.15.2
 transformers
 datasets
