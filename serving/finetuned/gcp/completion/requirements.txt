@@ -1,0 +1,17 @@
+# Core deep learning stack (CUDA 12.4 compatible)
+torch==2.7.1
+
+# Serving and framework
+fastapi
+pydantic
+uvicorn
+
+# vLLM (will build extensions matching torch/cu124)
+vllm==0.10.0
+
+# Model utilities
+constellaxion-utils==1.0.0
+watchdog
+gcsfs
+unsloth==2025.7.8
+safetensors

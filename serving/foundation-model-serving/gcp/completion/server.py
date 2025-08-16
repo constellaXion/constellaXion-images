@@ -1,12 +1,11 @@
 import os
 import subprocess
+from contextlib import asynccontextmanager
 import torch
 from fastapi import FastAPI
-from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from vllm import AsyncEngineArgs, AsyncLLMEngine
 from vllm.sampling_params import SamplingParams
-from contextlib import asynccontextmanager
 
 # Prevent any TorchDynamo compile attempts from crashing
 torch._dynamo.config.suppress_errors = True
@@ -97,25 +96,6 @@ async def predict(req: PromptRequest):
                 final_text = output.outputs[0].text
         results.append({"prediction": final_text})
     return {"predictions": results}
-
-# === /stream Endpoint: Streams Cumulative Text for Typing Effect ===
-@app.post("/stream")
-async def stream(req: PromptRequest):
-    """Stream text generation results for typing effect."""
-    sampling_params = SamplingParams(
-        temperature=req.instances[0].temperature,  # First instance params
-        top_k=req.instances[0].top_k,
-        top_p=req.instances[0].top_p,
-        max_tokens=req.instances[0].max_tokens,
-    )
-
-    async def token_stream():
-        async for request_output in engine.stream(req.instances[0].prompt, sampling_params):
-            output = request_output.outputs[0]
-            yield f"data: {output.text}\n\n"
-        yield "data: [DONE]\n\n"
-
-    return StreamingResponse(token_stream(), media_type="text/event-stream")
 
 # === /health Endpoint: Simple Health Check ===
 @app.get("/health")

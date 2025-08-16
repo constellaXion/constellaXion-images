@@ -1,0 +1,9 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - "build"
+      - "-t"
+      - ""
+      - "."
+images:
+  - "europe-west2-docker.pkg.dev/constellaxion/serving-images/base-model-auto-reg:latest"

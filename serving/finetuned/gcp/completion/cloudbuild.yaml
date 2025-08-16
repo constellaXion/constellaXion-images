@@ -1,0 +1,9 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - "build"
+      - "-t"
+      - "europe-west2-docker.pkg.dev/constellaxion/serving/unsloth-completion:latest"
+      - "."
+images:
+  - "europe-west2-docker.pkg.dev/constellaxion/serving/unsloth-completion:latest"
